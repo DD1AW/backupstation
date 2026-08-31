@@ -309,11 +309,6 @@ class EPD:
         image : Image data
     '''
     def displayPartial(self, image):
-        if self.width%8 == 0:
-            linewidth = int(self.width/8)
-        else:
-            linewidth = int(self.width/8) + 1
-
         epdconfig.digital_write(self.reset_pin, 0)
         epdconfig.delay_ms(1)
         epdconfig.digital_write(self.reset_pin, 1)  
@@ -355,11 +350,6 @@ class EPD:
         image : Image data
     '''
     def displayPartBaseImage(self, image):
-        if self.width%8 == 0:
-            linewidth = int(self.width/8)
-        else:
-            linewidth = int(self.width/8) + 1
-
         self.send_command(0x24)
         self.send_data2(image)  
                 
@@ -371,7 +361,7 @@ class EPD:
     function : Clear screen
     parameter:
     '''
-    def Clear(self, color):
+    def Clear(self, color=0xFF):
         if self.width%8 == 0:
             linewidth = int(self.width/8)
         else:
